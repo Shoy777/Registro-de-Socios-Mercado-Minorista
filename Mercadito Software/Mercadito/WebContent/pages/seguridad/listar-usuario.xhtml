@@ -1,0 +1,95 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="../../templates/master.xhtml"
+	xmlns:b="http://bootsfaces.net/ui">
+	
+	<ui:define name="contenido">
+		<div class="container-fluid">
+			<div class="col-sm-12 row">
+				<h2 class="text-center text-primary">Listado de Usuarios</h2>
+				<h:form id="formulario" class="col-sm-12" prependId="false">
+					<p:messages autoUpdate="true"/>
+			    	<div class="table-responsive">
+				    	<h:dataTable id="tbListadoSocios" styleClass="table table-condensed text-center table-stripped"
+					    	value="#{usuariomanaged.usuarios}"
+					    	var="s">
+				    		<p:column>
+				    			<f:facet name="header">ID</f:facet>
+				    			<h:outputText value="#{s.idUsuario}" />
+				    		</p:column>
+					    	<p:column style="width:48px;text-align: center">
+								<f:facet name="header">FotoUsuario</f:facet>
+								<p:graphicImage value="/#{s.mostrarFotoUsuario}" height="48" width="48" />
+							</p:column> 
+							<p:column style="width:48px;text-align: center">
+						    	<f:facet name="header">FirmaUsuario</f:facet>
+							  	<p:graphicImage value="/#{s.mostrarFirmaUsuario}" height="48" width="48" />
+						  	</p:column>
+				    		<p:column headerText="Usuario">
+				    			<f:facet name="header">Usuario</f:facet>
+				    			<h:outputText value="#{s.nombres}" />
+				    			<h:outputText value=" " />
+				    			<h:outputText value="#{s.apellidos}" />
+				    		</p:column>
+				    		<p:column headerText="DNI">
+				    			<f:facet name="header">DNI</f:facet>
+				    			<h:outputText value="#{s.dni}" />
+				    		</p:column>
+				    		<p:column headerText="Direccion de Residencia">
+				    			<f:facet name="header">Direccion de Residencia</f:facet>
+				    			<h:outputText value="#{s.direccionResidencia}" />
+				    		</p:column>
+				    		<p:column headerText="Telefonos">
+				    			<f:facet name="header">Telefonos</f:facet>
+				    			<h:outputText value="#{s.telefonoFijo}" />
+				    			<h:outputText value=" " />
+				    			<h:outputText value="#{s.telefonoMovil}" />
+				    		</p:column>
+				    		<p:column headerText="Correo">
+				    			<f:facet name="header">Correo</f:facet>
+				    			<h:outputText value="#{s.correo}" />
+				    		</p:column>
+				    		<p:column headerText="Fecha Nacimiento">
+				    			<f:facet name="header">Fecha Nacimiento</f:facet>
+				    			<h:outputText value="#{s.fechaNac}" >
+				    				<f:convertDateTime pattern="d-M-yyyy" />
+				    			</h:outputText>
+				    		</p:column>
+				    		<p:column headerText="Estado Civil">
+				    			<f:facet name="header">Estado Civil</f:facet>
+				    			<h:outputText value="#{s.estadoCivil}" />
+				    		</p:column>
+				    		<p:column headerText="Sexo">
+				    			<f:facet name="header">Sexo</f:facet>
+				    			<h:outputText value="#{s.sexo}" />
+				    		</p:column>
+				    		<p:column headerText="Fecha Ingreso">
+				    			<f:facet name="header">Fecha RegistroIngreso</f:facet>
+				    			<h:outputText value="#{s.fechaReg}" >
+				    				<f:convertDateTime pattern="d-M-yyyy" />
+				    			</h:outputText>
+				    		</p:column>
+				    		<p:column headerText="Lugar Nacimiento">
+				    			<f:facet name="header">Lugar Nacimiento</f:facet>
+				    			<h:outputText value="#{s.ubigeo.departamento}" />
+				    			<h:outputText value="-" />
+				    			<h:outputText value="#{s.ubigeo.provincia}" />
+				    			<h:outputText value="-" />
+				    			<h:outputText value="#{s.ubigeo.distrito}" />
+				    		</p:column>
+				    	</h:dataTable>
+			    	</div>
+			    	<script>
+					   jQuery(document).ready(function($) {
+							$('#tbListadoSocios').dataTable();
+					   });
+					</script>
+				</h:form>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

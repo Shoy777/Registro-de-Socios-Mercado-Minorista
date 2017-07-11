@@ -1,0 +1,295 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="../../templates/master.xhtml">
+	<style>
+	*{font-size:18px;}
+	</style>
+	<ui:define name="contenido">
+		<div class="container" >
+			<div class="col-sm-12">
+				
+				<h2 class="text-center text-primary">Modificar Usuario</h2>
+				
+				<h:form enctype="multipart/form-data" id="idForm" name="idForm" class="col-sm-12" prependId="false">
+					<p:messages autoUpdate="true"/>
+					<h:inputHidden id="idFirma" value="#{usuariomanaged.fotoEn64}"/>
+					<h:inputHidden id="idFoto" value="#{usuariomanaged.fotoEn642}"/>
+					
+					<!-- Datos Generales -->
+					<div class="row">
+					
+					<div class="form-group">
+						<h3>Buscar Usuario</h3>
+					</div>
+				
+					<div class="row">
+					<div class="col-sm-2 form-group"><label for="">Buscar por: </label></div>
+					<div class="col-sm-4 form-group">
+						<h:selectOneMenu class="form-control" value="#{usuariomanaged.tipoBusUsu}">
+							<f:selectItem itemValue="" itemLabel="Seleccione tipo de busqueda" />
+							<f:selectItem itemValue="1" itemLabel="Usuario" />
+							<f:selectItem itemValue="2" itemLabel="DNI" />
+						</h:selectOneMenu>
+					</div>
+					<div class="col-sm-3 form-group">
+						<h:inputText value="#{usuariomanaged.tipoCriterio}" type="text" class="form-control" placeholder="Ingrese criterio de busqueda"/>
+					</div>
+					<div class="col-sm-3 form-group">
+						<h:commandButton type="submit" 
+							styleClass="btn btn-info form-control"
+						   	ajax="false"
+						   	value="Consultar" 
+						   	action="#{usuariomanaged.buscarSocio}" >
+						</h:commandButton>
+					</div>
+					
+					<div class="col-sm-4 form-group col-sm-offset-4">
+						<h:selectOneMenu class="form-control" value="#{usuariomanaged.tipoActualizacion}">
+							<f:selectItem itemValue="0" itemLabel="Seleccione tipo de Actualización" />
+							<f:selectItem itemValue="1" itemLabel="Editar Datos del Usuario" />
+							<f:selectItem itemValue="2" itemLabel="Editar Firma" />
+							<f:selectItem itemValue="3" itemLabel="Editar Foto" />
+							<f:selectItem itemValue="4" itemLabel="Editar Firma y Foto" />
+							<f:selectItem itemValue="5" itemLabel="Eliminar Usuario" />
+						</h:selectOneMenu>
+					</div>
+					
+					</div>
+							<!-- Tipo de Usuario -->
+							<div class="col-sm-4 col-sm-offset-4">
+								<div class="form-group">
+								
+									<h:outputLabel styleClass="">Tipo de Usuario</h:outputLabel>
+									<h:selectOneMenu styleClass="form-control"  value="#{usuariomanaged.usuarioM.tipoUsuario}" id="tipoUsuario">
+										<f:selectItem itemValue="" itemLabel="Tipo de Usuario" />
+										<f:selectItem itemValue="Presidente" itemLabel="Presidente" />
+										<f:selectItem itemValue="Secretaria" itemLabel="Secretaria" />
+									</h:selectOneMenu>
+								</div>
+							</div>
+							
+						<div class="col-xs-12 col-sm-9">
+							
+							<!-- Datos Generales -->
+							<div class="datos-generales">
+								<h3>Datos Generales</h3>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<h:outputLabel styleClass="s">Nombres</h:outputLabel>
+										<h:inputText type="text" placeholder="Nombres" class="form-control" 
+											value="#{usuariomanaged.usuarioM.nombres}"/>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Apellidos</h:outputLabel>
+										<h:inputText type="text" placeholder="Apellidos" class="form-control" 
+											value="#{usuariomanaged.usuarioM.apellidos}" />
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<h:outputLabel styleClass="">DNI</h:outputLabel>
+										<h:inputText type="text" placeholder="DNI" class="form-control" 
+											value="#{usuariomanaged.usuarioM.dni}" onkeypress="return justNumbers(event);" 
+											onkeyup="this.value = this.value.slice(0,8)"/>
+									</div>
+								</div>
+								
+								<div class="col-sm-12">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Direccion de Residencia</h:outputLabel>
+										<h:inputText type="text" class="form-control" placeholder="Direccion de Residencia" 
+											value="#{usuariomanaged.usuarioM.direccionResidencia}"/>
+									</div>
+								</div>
+								
+								<!-- contacto -->
+								<div class="col-sm-3">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Telefono Fijo</h:outputLabel>
+										<h:inputText type="text" placeholder="Telefono Fijo" class="form-control" 
+											value="#{usuariomanaged.usuarioM.telefonoFijo}" onkeypress="return justNumbers(event);"
+											onkeyup="this.value = this.value.slice(0,7)"/>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Telefono Movil</h:outputLabel>
+										<h:inputText type="text" placeholder="Telefono Movil" class="form-control" 
+											value="#{usuariomanaged.usuarioM.telefonoMovil}" onkeypress="return justNumbers(event);" 
+											onkeyup="this.value = this.value.slice(0,9)"/>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Correo Electronico</h:outputLabel>
+										<h:inputText type="text" placeholder="Correo Electronico" class="form-control" 
+											value="#{usuariomanaged.usuarioM.correo}" id="correo_usuario"/>
+									</div>
+								</div>
+								
+								<div class="form-group col-sm-4">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Usuario</h:outputLabel>
+										<h:inputText type="text" class="form-control" placeholder="Usuario" 
+											value="#{usuariomanaged.usuarioM.usuario}" id="usuario_usuario" />
+									</div>
+								</div>
+								<div class="form-group col-sm-4">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Contraseña</h:outputLabel>
+										<h:inputText type="password" class="form-control" value="#{usuariomanaged.confirmar}" />
+									</div>
+								</div>
+								<div class="form-group col-sm-4">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Confirmar Contraseña</h:outputLabel>
+										<h:inputText type="password" class="form-control" placeholder="Contraseña" 
+											value="#{usuariomanaged.usuarioM.password}" />
+									</div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							
+							<!-- datos adicionales -->
+							<div class="datos-adicionales">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Fecha de Nacimiento</h:outputLabel>
+										<div class='input-group date' data-date-format="dd-mm-yyyy">
+											<p:calendar styleClass="" value="#{usuariomanaged.usuarioM.fechaNac}" />
+											<span class="input-group-addon">
+												<span class="glyphicon glyphicon-calendar"></span>
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Sexo</h:outputLabel>
+										<h:selectOneMenu styleClass="form-control"  value="#{usuariomanaged.usuarioM.sexo}" id="cboSexo">
+											<f:selectItem itemLabel="Seleccione Sexo" itemValue=""/>
+											<f:selectItems value="#{dominiomanaged.listadoSexo}" 
+												var="u" itemLabel="#{u.descripcion}" itemValue="#{u.descripcion}"/>
+										</h:selectOneMenu>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Estado Civil</h:outputLabel>
+										<h:selectOneMenu styleClass="form-control" value="#{usuariomanaged.usuarioM.estadoCivil}" id="cboEstadoCivil"
+										onchange="if(this.value=='CASADO') {document.getElementById('txtNomConyuge').disabled = false;
+										document.getElementById('txtNomConyuge').value = '';} 
+										else {document.getElementById('txtNomConyuge').disabled = true;
+										document.getElementById('txtNomConyuge').value = '';} ">
+											<f:selectItem itemLabel="Seleccione Estado Civil" itemValue=""/>
+											<f:selectItems value="#{dominiomanaged.listadoEstadoCivil}" 
+												var="u" itemLabel="#{u.descripcion}" itemValue="#{u.descripcion}"/>
+										</h:selectOneMenu>
+									</div>
+								</div>								
+								<div class="col-sm-12">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Nombre Conyugue</h:outputLabel>
+										<h:inputText type="text" placeholder="Nombre Conyugue" class="form-control" 
+											value="#{usuariomanaged.usuarioM.nombreConyuge}" id="txtNomConyuge"  disabled="true"/>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+								
+							<!-- Lugar de Nacimiento -->
+							<div class="lugar-nacimiento">
+								<h3>Lugar de Nacimiento</h3>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<div class="form-group">
+											<h:outputLabel class="form-control" id="lblLugarN" 
+												value="#{usuariomanaged.departamento2} - #{usuariomanaged.provincia2} - #{usuariomanaged.distrito2}"/>
+										</div>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+						
+						</div>
+						<!-- Captura de Foto -->
+						<div class="col-xs-12 col-sm-3">
+							<style>
+							#canvasFoto,#botonIniciar, #btnCapturar, #canvasFirma, #canvasHuella, #canvasVideo {
+								display:none;
+							}
+							#btnVolverT,#btnLimpiar{
+								margin:10px 0;
+							}
+							</style>
+							<video class="col-xs-12 col-sm-12 thumbnail" id="canvasVideo"></video>
+							<h:graphicImage styleClass="col-xs-12 col-sm-12 thumbnail" height="170" 
+								style="margin-top:5px" value="/#{usuariomanaged.foto}" id="mFoto"/>
+							<canvas class="col-xs-12 col-sm-12 thumbnail" id="canvasFoto"></canvas>
+							<button id='botonIniciar' type="button" class="btn btn-info col-xs-5 col-sm-5 col-sm-offset-0">
+								<span class="glyphicon glyphicon-camera"></span>
+							</button>
+							<button id='btnCapturar' type="button" class="btn btn-info col-xs-5 col-xs-offset-2 col-sm-5 col-sm-offset-2">
+								<span class="glyphicon glyphicon-picture"></span>
+							</button>
+							<button id='btnVolverT' value="Tomar" type="button" class="btn btn-info col-xs-12 col-sm-12 col-sm-offset-0">
+								<span>Volver a Tomar Foto</span>
+							</button>
+						</div>
+						<div class="col-xs-12 col-sm-3" id="">
+							<h:graphicImage styleClass="col-xs-12 col-sm-12 thumbnail" height="170" 
+								style="margin-top:5px" value="/#{usuariomanaged.firma}" id="mFirma"/>
+							<canvas class="col-xs-12 col-sm-12 thumbnail" id="canvasFirma" width="195" height="160">
+							Su navegador no soporta HTML5 Canvas
+							</canvas>
+							<button id='btnLimpiar' type="button" class="btn btn-info col-xs-12 col-sm-12">
+								<span>Editar Firma</span>
+							</button>
+							<h3 class="text-center">Firma del Usuario</h3>
+						</div>
+					</div>
+					
+					<!-- Submit -->
+					<div class="row">
+						<div class="col-sm-8 col-sm-offset-2">
+							<div class="form-group col-sm-offset-1 col-xs-offset-1 col-sm-10 col-xs-10">
+								<p:commandButton 
+									styleClass="btn btn-info form-control"
+							    	ajax="false"
+							    	value="Modificar Usuario" 
+							    	action="#{usuariomanaged.Editar}" update="@parent"
+							    	onclick="if (! confirm('¿Está Seguro de Realizar los cambios?')) return false">
+							    </p:commandButton>
+							</div>
+						</div>
+					</div>
+					<p:messages autoUpdate="true"/>
+					
+					<script>
+					$(document).ready(function() {
+					    $("#btnVolverT").click(function() {
+					    	$("#canvasVideo").toggle();
+					        $("#canvasFoto").toggle();
+					        $("#botonIniciar").toggle();
+					        $("#btnCapturar").toggle();
+					        $("#mFoto").hide(); 
+					    });
+					    $("#btnLimpiar").click(function(){
+					    	$("#canvasFirma").toggle();
+					    	$("#mFirma").hide();
+					    });
+					});
+					</script>			
+				</h:form>			
+				
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</ui:define>
+</ui:composition>

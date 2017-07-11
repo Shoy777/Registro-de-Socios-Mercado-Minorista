@@ -1,0 +1,145 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:b="http://bootsfaces.net/ui"
+	template="../../templates/master.xhtml">
+	
+	<ui:define name="contenido">
+		<div class="container">
+			<div class="col-sm-12 row">
+				<h2 class="text-center text-primary">Registrar Establecimiento</h2>
+				<h:form id="formulario" class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2" 
+						name="form" prependId="false">
+					
+					<!-- Pasaje Establecimiento -->
+					<div class="form-group form-block">
+						<label for="">Pasaje de Establecimiento</label>
+						<h:selectOneMenu value="#{establecimientomanaged.establecimiento.pasaje}" id="cboPasaje" styleClass="form-control">
+							<f:selectItem itemLabel="Seleccione Pasaje" itemValue=""/>
+							<f:selectItems value="#{dominiomanaged.listadoPasajes}" var="u"
+							itemLabel="#{u.descripcion}" itemValue="#{u.descripcion}"/>
+						</h:selectOneMenu>
+					</div>
+					<!-- Tipo Establecimiento -->
+					<div class="form-group form-block">
+						<label for="">Tipo de Establecimiento</label>
+						<h:selectOneMenu value="#{establecimientomanaged.establecimiento.tipo}" id="cboTipo" styleClass="form-control">
+							<f:selectItem itemLabel="Seleccione Tipo" itemValue="0"/>
+							<f:selectItems value="#{dominiomanaged.listadoTipo}" var="u"
+											itemLabel="#{u.descripcion}" itemValue="#{u.descripcion}"/>
+						</h:selectOneMenu>
+					</div>
+					<!-- Numero Establecimiento -->
+					<div class="form-group form-block">
+						<label for="">Numero de Establecimiento</label>
+						<h:selectOneMenu value="#{establecimientomanaged.establecimiento.numero}" id="cboNumero" styleClass="form-control">
+							<f:selectItem itemLabel="Seleccione Numero" itemValue=""/>
+							<f:selectItems value="#{dominiomanaged.listadoNumero}" var="u"
+											itemLabel="#{u.descripcion}" itemValue="#{u.descripcion}"/>
+						</h:selectOneMenu>
+					</div>
+					<!-- Precio Establecimiento -->
+					<div class="form-group form-block">
+						<label for="">Precio de Establecimiento</label>
+						<h:inputText type="text" value="#{establecimientomanaged.establecimiento.precioAlquiler}" 
+						styleClass="form-control" placeholder="Precio" id="txtPrecio" label="Precio">
+							<f:convertNumber/>
+						</h:inputText>
+					</div>
+					<!-- Boton Registrar Establecimiento -->
+					<div class="form-group">
+					    <p:commandButton value="Registrar Establecimiento" styleClass="btn btn-info form-control" ajax="false" 
+					    	action="#{establecimientomanaged.Grabar}" update="@parent" id="btnRegistrarEst"
+					    	onclick="if (! confirm('¿Está Seguro de Registrar el establecimiento?')) return false">
+						</p:commandButton>
+						<p:messages id="growl" closable="true"/>
+					</div>
+					
+					<h:dataTable id="tbEstablecimientos" styleClass="table table-condensed text-center table-stripped"
+					 style="width:100%" fixedHeader="true" responsive="true" lang="es"
+				    	value="#{establecimientomanaged.establecimientos}"
+				    	var="e">
+			    		<h:column>
+			    			<f:facet name="header">Codigo</f:facet>
+			    			<h:outputText value="#{e.idEstablecimiento}" />
+			    		</h:column>
+			    		<h:column>
+			    			<f:facet name="header">Establecimiento</f:facet>
+			    			<h:outputText value="#{e.pasaje}" />
+			    			<h:outputText value="#{e.tipo}" />
+			    			<h:outputText value="#{e.numero}" />
+			    		</h:column>
+			    		<h:column>
+			    			<f:facet name="header">Precio</f:facet>
+			    			<h:outputText value="S/. #{e.precioAlquiler}" converter="javax.faces.Long"/>
+			    		</h:column>
+			    		<h:column>
+			    			<f:facet name="header">Acciones</f:facet>
+			    			<p:commandLink ajax="false" action="#{establecimientomanaged.Buscar}">
+			    				<span class="glyphicon glyphicon-pencil"></span>
+			    				<f:setPropertyActionListener value="#{e.idEstablecimiento}" 
+	    						target="#{establecimientomanaged.establecimiento.idEstablecimiento}"/>
+			    			</p:commandLink>
+			    		</h:column>
+			    	</h:dataTable>
+			    	<script>
+					   jQuery(document).ready(function($) {
+							$('#tbEstablecimientos').dataTable();
+					   });
+					</script>
+					
+					<script type="text/javascript">
+					var btn = document.querySelector('#btnRegistrarEst');
+					var cboPasaje = document.getElementById("cboPasaje");
+					var cboTipo = document.getElementById("cboTipo");
+					var cboNumero = document.getElementById("cboNumero");
+					var txtPrecio = document.getElementById("txtPrecio");
+					var cboPasaje_input = document.getElementById("cboPasaje_input");
+					var cboTipo_input = document.getElementById("cboTipo_input");
+					var cboNumero_input = document.getElementById("cboNumero_input");
+					
+						
+if(cboPasaje.selectedIndex == 0){
+	cboPasaje.focus();
+	cboPasaje.style="border: solid 2px #1abcde;";
+}else if(cboTipo.selectedIndex == 0){
+	cboTipo.focus();
+	cboTipo.style="border: solid 2px #1abcde;";
+}else if(cboNumero.selectedIndex == 0){
+	cboNumero.focus();
+	cboNumero.style="border: solid 2px #1abcde;";
+}else if(txtPrecio.value == '0'){
+	txtPrecio.focus();
+	txtPrecio.style="border: solid 2px #1abcde;"
+	txtPrecio.value = '';
+}
+</script>
+<style>
+label input,label select{
+height: 34px;
+font-size: 14px;
+color: #555;
+background-color: #fff;
+background-image: none;
+border: 1px solid #ccc;
+border-radius: 4px;
+-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+max-width:170px;
+}
+label input{
+padding:6px;
+}
+</style>
+				</h:form>
+				
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

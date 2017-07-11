@@ -1,0 +1,148 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:b="http://bootsfaces.net/ui"
+	template="../../templates/master.xhtml">
+	
+	<ui:define name="contenido">
+		<div class="container">
+			<div class="col-sm-12 row">
+				<h2 class="text-center text-primary">Modificar Establecimiento</h2>
+				<h:form id="formulario" class="col-sm-8 col-sm-offset-1 col-md-10 col-md-offset-1" prependId="false">
+					<p:messages showDetail="true" autoUpdate="true"/>
+					<div class="col-sm-1 form-group"><label for="">Buscar por: </label></div>
+					<div class="col-sm-3 form-group">
+						<h:selectOneMenu value="#{establecimientomanaged.pasajeB}" id="cboPasajeB" styleClass="form-control">
+							<f:selectItem itemLabel="Seleccione Pasaje" itemValue=""/>
+							<f:selectItems value="#{dominiomanaged.listadoPasajes}" var="u"
+							itemLabel="#{u.descripcion}" itemValue="#{u.descripcion}"/>
+						</h:selectOneMenu>
+					</div>
+					<div class="col-sm-3 form-group">
+						<h:selectOneMenu value="#{establecimientomanaged.tipoB}" id="cboTipoB" styleClass="form-control">
+							<f:selectItem itemLabel="Seleccione Tipo" itemValue=""/>
+							<f:selectItems value="#{dominiomanaged.listadoTipo}" var="u"
+											itemLabel="#{u.descripcion}" itemValue="#{u.descripcion}"/>
+						</h:selectOneMenu>
+					</div>
+					<div class="col-sm-3 form-group">
+						<h:selectOneMenu value="#{establecimientomanaged.numeroB}" id="cboNumeroB" styleClass="form-control">
+							<f:selectItem itemLabel="Seleccione Numero" itemValue=""/>
+							<f:selectItems value="#{dominiomanaged.listadoNumero}" var="u"
+											itemLabel="#{u.descripcion}" itemValue="#{u.descripcion}"/>
+						</h:selectOneMenu>
+					</div>
+					<div class="col-sm-2 form-group">
+						<p:commandButton styleClass="form-control btn btn-info" ajax="false"
+							value="Consultar" action="#{establecimientomanaged.buscarEstablecimiento}">
+						</p:commandButton>
+					</div>
+					
+					<div class="form-group form-block">
+						<label for="">Codigo de Establecimiento</label>
+						<h:inputText type="text" value="#{establecimientomanaged.establecimiento.idEstablecimiento}" 
+							styleClass="form-control" placeholder="ID" id="txtID" onkeydown="return false;">
+						</h:inputText>
+					</div>
+					<div class="form-group form-block">
+						<label for="">Pasaje de Establecimiento</label>
+						<h:inputText value="#{establecimientomanaged.establecimiento.pasaje}" id="cboPasaje" 
+							styleClass="form-control" onkeydown="return false;" />
+					</div>
+					<div class="form-group form-block">
+						<label for="">Tipo de Establecimiento</label>
+						<h:inputText value="#{establecimientomanaged.establecimiento.tipo}" id="cboTipo" 
+							styleClass="form-control" onkeydown="return false;" />
+					</div>
+					<div class="form-group form-block">
+						<label for="">Numero de Establecimiento</label>
+						<h:inputText value="#{establecimientomanaged.establecimiento.numero}" 
+							styleClass="form-control" onkeydown="return false;" />
+					</div>
+					<div class="form-group form-block">
+						<label for="">Precio de Establecimiento</label>
+						<h:inputText type="text" value="#{establecimientomanaged.establecimiento.precioAlquiler}" 
+							styleClass="form-control" placeholder="Precio" id="txtPrecio" converterMessage="Ingrese un valor correcto, sea un valor entero o decimal">
+						</h:inputText>
+					</div>
+					<div class="form-group">
+						<p:commandButton type="submit" 
+							styleClass="btn btn-info form-control"
+					    	ajax="false" id="btnModEst"
+					    	value="Modificar Establecimiento" 
+					    	action="#{establecimientomanaged.Editar}"
+					    	onclick="if (! confirm('¿Está Seguro de Realizar Cambios?')) return false">
+					    </p:commandButton>
+					</div>
+					<script>
+					jQuery(document).ready(function($) {
+						$('#data').dataTable();
+					});
+					</script>
+					<h:dataTable id="data" styleClass="table table-condensed text-center table-stripped"
+					 style="width:100%" fixedHeader="true" responsive="true" lang="it"
+				    	value="#{establecimientomanaged.establecimientos}"
+				    	var="e"
+				    	rows="10"
+				    	paginator="true">
+			    		<h:column headerText="Codigo">
+			    			<f:facet name="header">Codigo</f:facet>
+			    			<h:outputText value="#{e.idEstablecimiento}" />
+			    		</h:column>
+			    		<h:column headerText="Establecimiento">
+			    			<f:facet name="header">Establecimiento</f:facet>
+			    			<h:outputText value="#{e.pasaje}" />
+			    			<h:outputText value="#{e.tipo}" />
+			    			<h:outputText value="#{e.numero}" />
+			    		</h:column>
+			    		<h:column headerText="Precio">
+			    			<f:facet name="header">Precio</f:facet>
+			    			<h:outputText value="#{e.precioAlquiler}" />
+			    		</h:column>
+			    		<h:column>
+			    			<f:facet name="header">Acciones</f:facet>
+			    			<p:commandLink ajax="false" action="#{establecimientomanaged.Buscar}">
+			    				<span class="glyphicon glyphicon-pencil"></span>
+			    				<f:setPropertyActionListener value="#{e.idEstablecimiento}" 
+	    						target="#{establecimientomanaged.establecimiento.idEstablecimiento}"/>
+			    			</p:commandLink>
+			    		</h:column>
+			    	</h:dataTable>
+			    	<script type="text/javascript">
+					var btn = document.querySelector('#btnModEst');
+					var txtPrecio = document.getElementById("txtPrecio");
+						
+if(txtPrecio.value == '0'){
+	txtPrecio.focus();
+	txtPrecio.style="border: solid 2px #1abcde;"
+	txtPrecio.value = '';
+}
+</script>
+<style>
+label input,label select{
+height: 34px;
+font-size: 14px;
+color: #555;
+background-color: #fff;
+background-image: none;
+border: 1px solid #ccc;
+border-radius: 4px;
+-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+max-width:170px;
+}
+label input{
+padding:6px;
+}
+</style>
+				</h:form>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<f:view contentType="text/html">
+<h:head>
+	<title>Mercado Señor de los Milagros</title>
+	<link href="#{request.contextPath}/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+	<link href="#{request.contextPath}/bootstrap/estilos.css" rel="stylesheet"/>
+	
+</h:head>
+<h:body>
+	<section class="main" style="margin-top:25vh">
+		<div class="container">
+			<h1 class="text-center">Bienvenidos al Mercado Señor de los Milagros</h1>
+			<div class="col-sm-12 row">
+			
+				<h:form class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 ">
+                     <p:messages autoUpdate="true"/> 	
+ 
+					<h2 class="text-center text-primary">Necesita iniciar sesi&oacute;n para ingresar al sistema</h2>
+					<p:messages showDetail="true" globalOnly="true" showSummary="true" autoUpdate="true"/>
+					<div class="form-group form-block">
+						<label for="" class="">Usuario</label>
+						<h:inputText type="text" id="txtUsuario" styleClass="form-control" placeholder="Usuario" 
+						required="true" requiredMessage="Ingrese su usuario" value="#{usuariomanaged.user}" />
+						<p:message for="txtUsuario"/>
+					</div>
+					<div class="form-group form-block">
+						<label for="" class="">Contrase&ntilde;a</label>
+						<h:inputSecret type="password" id="txtPassword" class="form-control" placeholder="Contrase&ntilde;a" 
+						required="true" requiredMessage="Ingrese su Password" value="#{usuariomanaged.password}"/>
+						<p:message for="txtPassword"/>
+					</div>
+					<div class="form-group form-block">
+						<p:commandButton type="submit" styleClass="btn btn-info btn-block" value="Iniciar Sesion" action="#{usuariomanaged.Login}" 
+						ajax="true"/>
+					</div>
+				</h:form>
+				<div class="clearfix"></div>
+				
+			</div>
+		</div>
+	</section>
+</h:body>
+</f:view>
+</html>

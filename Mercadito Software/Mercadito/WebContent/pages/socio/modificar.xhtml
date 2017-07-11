@@ -1,0 +1,371 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="../../templates/master.xhtml">
+	<style>
+							
+							#btnVolverT,#btnLimpiar{
+								margin:10px 0;
+							}
+							</style>
+	<ui:define name="contenido">
+		<div class="container">
+			<div class="col-sm-12">
+				<h2 class="text-center text-primary">Actualizar Socio</h2>
+				<h:form id="idForm" class="col-sm-12" prependId="false">
+					<script>
+					jQuery(document).ready(function($) {
+						$('#tbListadoEst').dataTable();
+					});
+					</script>
+					<h:inputHidden id="idFirma" value="#{sociomanaged.fotoEn64}"/>
+					<h:inputHidden id="idFoto" value="#{sociomanaged.fotoEn642}"/>
+					<p:messages autoUpdate="true"/>
+					
+					<div class="form-group">
+						<h3>Buscar Socio</h3>
+					</div>
+				
+					<div class="row">
+					<div class="col-sm-2 form-group"><label for="">Buscar por: </label></div>
+					<div class="col-sm-4 form-group">
+						<h:selectOneMenu class="form-control" value="#{sociomanaged.tipoBusSocio}">
+							<f:selectItem itemValue="0" itemLabel="Seleccione tipo de busqueda" />
+							<f:selectItem itemValue="1" itemLabel="Socio" />
+							<f:selectItem itemValue="2" itemLabel="DNI" />
+						</h:selectOneMenu>
+					</div>
+					<div class="col-sm-3 form-group">
+						<h:inputText value="#{sociomanaged.tipoCriterio}" type="text" class="form-control" placeholder="Ingrese criterio de busqueda"/>
+					</div>
+					<div class="col-sm-3 form-group">
+						<h:commandButton type="submit" 
+							styleClass="btn btn-info form-control"
+						   	ajax="false"
+						   	value="Consultar" 
+						   	action="#{sociomanaged.buscarSocio}" >
+						</h:commandButton>
+					</div>	
+					
+					<div class="col-sm-4 form-group col-sm-offset-4">
+						<h:selectOneMenu class="form-control" value="#{sociomanaged.tipoActualizacion}">
+							<f:selectItem itemValue="0" itemLabel="Seleccione tipo de Actualización" />
+							<f:selectItem itemValue="1" itemLabel="Editar Datos del Socio" />
+							<f:selectItem itemValue="2" itemLabel="Editar Firma" />
+							<f:selectItem itemValue="3" itemLabel="Editar Foto" />
+							<f:selectItem itemValue="4" itemLabel="Editar Firma y Foto" />
+							<f:selectItem itemValue="5" itemLabel="Eliminar Socio" />
+							<f:selectItem itemValue="6" itemLabel="Cambiar Establecimientos Alquilados" />
+						</h:selectOneMenu>
+					</div>
+					
+					</div>
+					<!-- Datos Generales -->
+					<div class="row">
+						<div class="col-xs-12 col-sm-9">
+							<div class="datos-generales">
+								<h3>Datos Generales</h3>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<h:outputLabel styleClass="s">Nombres</h:outputLabel>
+										<h:inputText type="text" placeholder="Nombres" class="form-control" 
+										value="#{sociomanaged.socio.nombres}" id="txtNombres"
+										onkeyup="this.value = this.value.slice(0,100)"/>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Apellidos</h:outputLabel>
+										<h:inputText type="text" placeholder="Apellidos" class="form-control" 
+										value="#{sociomanaged.socio.apellidos}" id="txtApellidos" 
+										onkeyup="this.value = this.value.slice(0,100)"/>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<h:outputLabel styleClass="">DNI</h:outputLabel>
+										<h:inputText type="text" placeholder="DNI" class="form-control" value="#{sociomanaged.socio.dni}" 
+										id="txtDNI" onkeypress="return justNumbers(event);" onkeyup="this.value = this.value.slice(0,8)"/>
+									</div>
+								</div>
+								
+								<div class="col-sm-12">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Direccion de Residencia</h:outputLabel>
+										<h:inputText type="text" class="form-control" placeholder="Direccion de Residencia" 
+										id="txtDirResidencia" value="#{sociomanaged.socio.direccionResidencia}" onkeyup="this.value = this.value.slice(0,200)"/>
+									</div>
+								</div>
+								
+								<!-- contacto -->
+								<div class="col-sm-3">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Telefono Fijo</h:outputLabel>
+										<h:inputText type="text" placeholder="Telefono Fijo" class="form-control" id="txtTelFijo"
+										value="#{sociomanaged.socio.telefonoFijo}" onkeypress="return justNumbers(event);"
+										onkeyup="this.value = this.value.slice(0,7)"/>
+									</div>
+								</div>
+								
+								<div class="col-sm-3">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Telefono Movil</h:outputLabel>
+										<h:inputText type="text" placeholder="Telefono Movil" class="form-control" id="txtTelMovil"
+										value="#{sociomanaged.socio.telefonoMovil}" onkeypress="return justNumbers(event);" 
+										onkeyup="this.value = this.value.slice(0,9);"/>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Correo Electronico</h:outputLabel>
+										<h:inputText type="text" placeholder="Correo Electronico" class="form-control" id="txtCorreo"
+										value="#{sociomanaged.socio.correo}">
+										</h:inputText>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							
+							<!-- datos adicionales -->
+							<div class="datos-adicionales">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Fecha de Nacimiento</h:outputLabel>
+										<div class='input-group date' data-date-format="dd-mm-yyyy">
+										
+											<p:calendar styleClass="" value="#{sociomanaged.socio.fechaNac}" id="txtFecNac" 
+												locale="de" navigator="true" pattern="MM/dd/yyyy" onkeydown="return false;" />
+											<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Sexo</h:outputLabel>
+										<h:selectOneMenu styleClass="form-control"  value="#{sociomanaged.socio.sexo}" id="cboSexo">
+											<f:selectItem itemLabel="Seleccione Sexo" itemValue=""/>
+											<f:selectItems value="#{dominiomanaged.listadoSexo}" 
+											var="u" itemLabel="#{u.descripcion}" itemValue="#{u.descripcion}"/>
+										</h:selectOneMenu>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Estado Civil</h:outputLabel>
+										<h:selectOneMenu styleClass="form-control" value="#{sociomanaged.socio.estadoCivil}" 
+										onchange="if(this.value=='CASADO') {document.getElementById('txtNomConyuge').disabled = false;
+										document.getElementById('txtNomConyuge').value = '';} 
+										else {document.getElementById('txtNomConyuge').disabled = true;
+										document.getElementById('txtNomConyuge').value = '';} " id="cboEstadoCivil">
+											<f:selectItem itemLabel="Seleccione Estado Civil" itemValue=""/>
+											<f:selectItems value="#{dominiomanaged.listadoEstadoCivil}" 
+												var="u" itemLabel="#{u.descripcion}" itemValue="#{u.descripcion}"/>
+										</h:selectOneMenu>
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Nombre Conyuge</h:outputLabel>
+										<h:inputText type="text" placeholder="Nombre Conyuge" class="form-control" id="txtNomConyuge"
+										value="#{sociomanaged.socio.nombreConyuge}" disabled="true" />
+									</div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+								
+							<!-- Lugar de Nacimiento -->
+							<div class="lugar-nacimiento">
+								<h3>Lugar de Nacimiento</h3>
+								
+								<div class="col-sm-12">
+									<div class="form-group">
+										<h:outputLabel class="form-control" id="lblLugarN" 
+											value="#{sociomanaged.departamento2} - #{sociomanaged.provincia2} - #{sociomanaged.distrito2}"/>
+									</div>
+								</div>
+								
+								<div class="clearfix"></div>
+							</div>
+							
+							<!-- Datos de Societario -->
+							<div class="datos-societario">
+								<h3>Datos de Societario</h3>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Fecha de Inscripcion</h:outputLabel>
+										<div class='input-group date' data-date-format="dd-mm-yyyy">
+											<p:calendar styleClass="" value="#{sociomanaged.socio.fechaIns}" id="txtFecIns" 
+												locale="de" navigator="true" pattern="MM/dd/yyyy" onkeydown="return false;" disabledWeekends="true"/>
+											<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Fecha de Reinscripcion</h:outputLabel>
+										<div class='input-group date' data-date-format="dd-mm-yyyy">
+											<p:calendar styleClass="" value="#{sociomanaged.socio.fechaReins}" id="txtFecReins" 
+												locale="de" navigator="true" pattern="MM/dd/yyyy" onkeydown="return false;"/>
+											<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Fecha de Ingreso</h:outputLabel>
+										<div class='input-group date' data-date-format="dd-mm-yyyy">
+											<p:calendar styleClass="" value="#{sociomanaged.socio.fechaIng}" id="txtFecIng"  
+												locale="de" navigator="true" pattern="MM/dd/yyyy" onkeydown="return false;" disabledWeekends="true"/>
+											<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+										</div>
+									</div>
+								</div>
+								<div class="form-group col-sm-12">
+									<h:outputLabel styleClass="">Cargo que ocupo anteriormente</h:outputLabel>
+									<h:inputText type="text" placeholder="Cargo que ocupo anteriormente" class="form-control" 
+									id="txtCargoAnterior" value="#{sociomanaged.socio.cargoAnterior}"/>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+						
+						</div>
+						<!-- Captura de Foto -->
+						<div class="col-xs-12 col-sm-3">
+							<video class="col-xs-12 col-sm-12 thumbnail" id="canvasVideo"></video>
+							<h:graphicImage styleClass="col-xs-12 col-sm-12 thumbnail" height="170" style="margin-top:5px" 
+								value="/#{sociomanaged.foto}" id="mFoto"/>
+							<canvas class="col-xs-12 col-sm-12 thumbnail" id="canvasFoto"></canvas>
+							<button id='botonIniciar' type="button" class="btn btn-info col-xs-5 col-sm-5 col-sm-offset-0">
+								<span class="glyphicon glyphicon-camera"></span>
+							</button>
+							<button id='btnCapturar' type="button" class="btn btn-info col-xs-5 col-xs-offset-2 col-sm-5 col-sm-offset-2">
+								<span class="glyphicon glyphicon-picture"></span>
+							</button>
+							<button id='btnVolverT' value="Tomar" type="button" class="btn btn-info col-xs-12 col-sm-12 col-sm-offset-0">
+								<span>Volver a Tomar Foto</span>
+							</button>
+						</div>
+					</div>
+					
+					<!-- Datos Comerciales		 -->
+					<div class="row">
+						<div class="col-sm-12">
+							<h3>Datos Comerciales</h3>
+						</div>
+						<div class="col-sm-12">
+						
+							<div class="table-responsive">
+								<h:dataTable id="tbListadoEst" styleClass="table table-condensed text-center table-stripped"
+							    	value="#{establecimientomanaged.establecimientos}" var="e" >
+						    		<h:column headerText="Codigo">
+						    			<f:facet name="header">Codigo</f:facet>
+						    			<h:outputText value="#{e.idEstablecimiento}" />
+						    		</h:column>
+						    		<h:column headerText="Establecimiento">
+						    			<f:facet name="header">Tipo</f:facet>
+						    			<h:outputText value="#{e.tipo}" />
+						    		</h:column>
+						    		<h:column headerText="Establecimiento">
+						    			<f:facet name="header">Pasaje</f:facet>
+						    			<h:outputText value="#{e.pasaje}" />
+						    		</h:column>
+						    		<h:column headerText="Establecimiento">
+						    			<f:facet name="header">Numero</f:facet>
+						    			<h:outputText value="#{e.numero}" />
+						    		</h:column>
+						    		<h:column headerText="Precio">
+						    			<f:facet name="header">Precio</f:facet>
+						    			<h:outputText value="#{e.precioAlquiler}" />
+						    		</h:column>
+						    		<h:column headerText="Alquilar">
+										<f:facet name="header">Alquilar</f:facet>
+										<h:selectBooleanCheckbox type="checkbox"/>
+						    		</h:column>
+						    		<h:column headerText="Alquilar">
+						    			<f:facet name="header">Giro de Negocio</f:facet>
+						    			<h:inputText styleClass="form-control"/>
+						    		</h:column>
+						    	</h:dataTable>
+							</div>
+							<div class="col-sm-12">
+								<div class="form-group col-sm-6">
+									<label for="">Cantidad de Establecimientos seleccionados</label>
+									<label for="" class="form-control text-center" id="txtCanSelEstablecimientos">0</label>
+								</div>
+								<div class="form-group col-sm-6">
+									<label for="">Monto a Pagar</label>
+									<input type="text" placeholder="Total a Pagar" class="form-control" id="txtTotalMonto"/>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+							
+					<!-- Firma y huella digital -->
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="col-xs-12 col-sm-3" id="">
+								<h:graphicImage styleClass="col-xs-12 col-sm-12 thumbnail" height="170" 
+									style="margin-top:5px" value="/#{sociomanaged.firma}" id="mFirma"/>
+								<canvas class="col-xs-12 col-sm-12 thumbnail" id="canvasFirma" width="195" height="160">
+								Su navegador no soporta HTML5 Canvas
+								</canvas>
+								<button id='btnLimpiar' type="button" class="btn btn-info col-xs-12 col-sm-12">
+									<span>Editar Firma</span>
+								</button>
+								<h3 class="text-center">Firma Socio</h3>
+							</div>
+							<div class="col-xs-12 col-sm-3">
+								<h:graphicImage styleClass="col-xs-12 col-sm-12 thumbnail" height="170" style="margin-top:5px" 
+									value="/bootstrap/img/huella.jpg" />
+								<h3 class="text-center">Huella Digital</h3>
+							</div>
+							<div class="col-xs-12 col-sm-3">
+								<h:graphicImage styleClass="col-xs-12 col-sm-12 thumbnail" height="170" style="margin-top:5px" value="/#{usuariomanaged.firma}" />
+								<h3 class="text-center">Firma de Presidente</h3>
+							</div>
+							<div class="col-xs-12 col-sm-3" id="">
+								<h:graphicImage styleClass="col-xs-12 col-sm-12 thumbnail" height="170" style="margin-top:5px" value="/#{usuariomanaged.firma}" />
+								<h3 class="text-center">Firma de Secretaria</h3>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+									
+					<!-- Submit -->
+					<div class="row">
+						<div class="col-sm-8 col-sm-offset-2">
+							<div class="form-group col-sm-offset-1 col-xs-offset-1 col-sm-10 col-xs-10">
+								<h:commandButton type="submit" 
+									styleClass="btn btn-info form-control"
+							    	ajax="false"
+							    	value="Modificar Socio" 
+							    	action="#{sociomanaged.Editar}" onclick="if (! confirm('¿Está Seguro de Realizar los Cambios?')) return false">
+							    </h:commandButton>
+							</div>
+						</div>
+					</div>
+					
+					<script>
+					var btnLimpiar = document.getElementById("btnLimpiar");
+					window.addEventListener('load', init);
+					function init(){
+						btnLimpiar.addEventListener('click', function(e){
+							ALERT("FHFH");
+						});
+					}
+					</script>
+					<style>
+					#btnVolverT,#btnLimpiar{
+								margin:10px 0;
+							}
+							</style>
+				</h:form>
+			</div>
+		</div>
+		
+	</ui:define>
+</ui:composition>

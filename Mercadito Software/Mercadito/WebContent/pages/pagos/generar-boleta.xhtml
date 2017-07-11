@@ -1,0 +1,84 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="../../templates/master.xhtml"
+	xmlns:b="http://bootsfaces.net/ui">
+	
+	<ui:define name="contenido">
+	
+    <div class="container">
+			<h2 class="text-center text-primary">Generar Boleta</h2>
+			<div class="col-sm-12 ">
+				<div class="form-group">
+					<h3>Buscar Socio</h3>
+				</div>
+				<h:form action="" class="col-sm-12">
+					<div class="col-sm-2 form-group"><label for="">Buscar por: </label></div>
+					<div class="col-sm-3 form-group">
+						<select name="" id="" class="form-control">
+							<option value="">Socio</option>
+							<option value="">DNI</option>
+							<option value="">RUC</option>
+						</select>
+					</div>
+					<div class="col-sm-4 form-group"><input type="text" class="form-control" placeholder="Ingrese criterio de busqueda"/></div>
+					<div class="col-sm-3 form-group"><input type="submit" class="form-control btn btn-info" value="Consultar"/></div>
+					
+					<div class="row">
+						<div class="col-sm-12">
+							<h3>Establecimientos del Socio</h3>
+						</div>
+						<div class="col-sm-12">
+						
+							<div class="table-responsive">
+								<h:dataTable id="tbListadoEst" styleClass="table table-condensed text-center table-stripped"
+							    	value="#{establecimientomanaged.establecimientos}" var="e" >
+						    		<h:column headerText="Codigo">
+						    			<f:facet name="header">Codigo</f:facet>
+						    			<h:outputText value="#{e.idEstablecimiento}" />
+						    		</h:column>
+						    		<h:column headerText="Establecimiento">
+						    			<f:facet name="header">Tipo</f:facet>
+						    			<h:outputText value="#{e.tipo}" />
+						    		</h:column>
+						    		<h:column headerText="Establecimiento">
+						    			<f:facet name="header">Pasaje</f:facet>
+						    			<h:outputText value="#{e.pasaje}" />
+						    		</h:column>
+						    		<h:column headerText="Establecimiento">
+						    			<f:facet name="header">Numero</f:facet>
+						    			<h:outputText value="#{e.numero}" />
+						    		</h:column>
+						    		<h:column headerText="Precio">
+						    			<f:facet name="header">Precio</f:facet>
+						    			<h:outputText value="#{e.precioAlquiler}" />
+						    		</h:column>
+						    	</h:dataTable>
+							</div>
+							<div class="col-sm-12">
+								<div class="form-group col-sm-6">
+									<label for="">Cantidad de Establecimientos</label>
+									<label for="" class="form-control text-center" id="txtCanSelEstablecimientos">4</label>
+								</div>
+								<div class="form-group col-sm-6">
+									<label for="">Monto a Pagar</label>
+									<h:inputText type="text" placeholder="Total a Pagar" class="form-control" 
+										onkeydown="return false;" id="txtTotalMonto" value="46001"/>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					
+					<div class="col-sm-12 form-group">
+						<h:inputText type="submit" class="form-control btn btn-info" value="Generar Boleta"/>
+					</div>
+					
+				</h:form>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

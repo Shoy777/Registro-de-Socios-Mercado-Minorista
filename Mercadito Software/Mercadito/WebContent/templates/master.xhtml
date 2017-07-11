@@ -1,0 +1,277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<f:view contentType="text/html">
+<h:head>
+	<title>Mercado Señor de los Milagros</title>
+	
+	<link href="#{request.contextPath}/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+	<link href="#{request.contextPath}/bootstrap/datepicker.css" rel="stylesheet"/>
+	<link href="#{request.contextPath}/bootstrap/estilos.css" rel="stylesheet"/>
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+	<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css"/>
+	<link rel="stylesheet" href="#{request.contextPath}/bootstrap/css/master.css"/>
+	<link rel="stylesheet" href="#{request.contextPath}/bootstrap/DataTables/media/css/jquery.dataTables.css" />
+	<script type="text/javascript" src="#{request.contextPath}/bootstrap/jquery.min.js"></script>
+	<script type="text/javascript" src="#{request.contextPath}/bootstrap/bootstrap-datepicker.js"></script>
+	<script type="text/javascript" src="#{request.contextPath}/bootstrap/DataTables/media/js/jquery.dataTables.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function () {
+		$("header>ul>li a").click(function(e) {
+			if(window.)
+			e.preventdefault();
+		});
+	});
+	</script>
+	<style>
+	.hover{
+		vertical-align: middle;
+		display: block;
+		margin-top:13px;
+		padding-top:5px;
+		font-size:25px;
+		height:40px;
+		width:40px;
+		background-color:white;padding-right: 5px;padding-left: 5px;
+		border-radius:5px;
+	}
+	.hover:hover{color:#000;}
+	form {
+		    background-color: transparent !important;
+	}
+	form:nth-child(2) {
+		margin-bottom:100px;
+	}
+	.form-bottom{
+		margin-bottom:100px;
+	}
+label input,label select{
+height: 34px;
+font-size: 14px;
+color: #555;
+background-color: #fff;
+background-image: none;
+border: 1px solid #ccc;
+border-radius: 4px;
+-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+max-width:170px;
+}
+label input{
+padding:6px;
+}
+.img2{
+	margin: 0px;
+    width: 40px;
+    height: 40px;
+    box-sizing: border-box;
+    border: solid 2px #fff;
+    border-radius: 5px;
+    margin-top: 13px;
+    }
+	</style>
+	<f:event listener="#{usuariomanaged.verificarSesion}" type="preRenderView"></f:event>
+</h:head>
+<h:body class="">
+	<header>
+		<div class="container">
+			<nav class="navbar navbar-inverse navbar-fixed-top">
+				<div class="container">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+					  <a class="navbar-brand titleAnimation" href="#{request.contextPath}/pages/index.jsf" title="Pagina de Inicio">Mercado Minorista</a>
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li role="presentation">
+								<a href="#">
+								<h:outputLabel value="#{usuariomanaged.nombres}"/> 
+								<h:outputLabel value="#{usuariomanaged.apellidos}"/>
+								<h:graphicImage value="/#{usuariomanaged.foto}" 
+								styleClass="img">
+								</h:graphicImage></a>
+							</li>
+							<li role="presentation">
+								<h:graphicImage value="/#{usuariomanaged.foto}" 
+								styleClass="img2">
+								</h:graphicImage>
+							</li>
+							<li role="presentation">
+				                <h:form>
+					            	<h:commandLink styleClass="fa fa-fw fa-power-off btn hover" 
+					            	actionListener="#{usuariomanaged.cerrarSesion}"
+					            	action="/pages/Login?faces-redirect=true"
+					            	title="Cerrar Sesion" >
+					             	</h:commandLink>
+				                </h:form>
+				            </li>
+						</ul>
+					</div><!-- /.navbar-collapse -->
+				</div><!-- /.container-fluid -->
+			</nav>
+		</div>
+	</header>
+	
+	<header>
+	<div class="nav-side-menu">
+			<i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+			<div class="menu-list">
+				<ul id="menu-content" class="menu-content collapse out">
+					<li class="active">
+						<a href="#"><i class="fa fa-dashboard fa-lg"></i> Mi Tablero</a>
+					</li>
+					<li  data-toggle="collapse" data-target="#socios" class="collapsed">
+						<a href="#"><i class="fa fa-users fa-lg"></i> Socios <span class="arrow"></span></a>
+					</li>
+					<ul class="sub-menu collapse" id="socios">
+						<li><a href="#{request.contextPath}/pages/socio/registrar.jsf">Registrar Socio</a></li>
+	                    <li><a href="#{request.contextPath}/pages/socio/modificar.jsf">Actualizar Socio</a></li>
+	                    <li><a href="#{request.contextPath}/pages/socio/listar.jsf">Listado de Socios</a></li>
+					</ul>
+					<li data-toggle="collapse" data-target="#pagos" class="collapsed" title="En construccion">
+						<a href="#"><i class="fa fa-dollar fa-lg"></i> Pagos <span class="arrow"></span></a>
+					</li>
+					<ul class="sub-menu collapse" id="pagos">
+						<li><a href="#{request.contextPath}/pages/pagos/registrar-pago.jsf" title="En construccion">Registrar Pago</a>
+							<h:graphicImage style="width:25px;float:right;margin-top:2px;margin-right:5px" value="/bootstrap/img/construccion.png" title="En construccion" />
+						</li>
+						<li><a href="#{request.contextPath}/pages/pagos/generar-boleta.jsf" title="En construccion">Generar Boleta</a>
+							<h:graphicImage style="width:25px;float:right;margin-top:2px;margin-right:5px" value="/bootstrap/img/construccion.png" title="En construccion" />
+						</li>
+						<li>Listado de Boletas</li>
+					</ul>
+					<li data-toggle="collapse" data-target="#establecimiento" class="collapsed">
+						<a href="#"><i class="fa fa-institution fa-lg"></i> Establecimiento <span class="arrow"></span></a>
+					</li>
+					<ul class="sub-menu collapse" id="establecimiento">
+						<li><a href="#{request.contextPath}/pages/establecimiento/registrar.jsf">Registrar Establecimiento</a></li>
+						<li><a href="#{request.contextPath}/pages/establecimiento/modificar.jsf">Actualizar Establecimiento</a></li>
+					</ul>
+					<li><a href="#"><i class="fa fa-user-secret fa-lg"></i> Perfil</a></li>					
+					<li data-toggle="collapse" data-target="#usuario" class="collapsed">
+						<a href="#"><i class="fa fa-user fa-lg"></i> Usuario <span class="arrow"></span></a>
+					</li>
+					<ul class="sub-menu collapse" id="usuario">
+						<li><a href="#{request.contextPath}/pages/seguridad/registrar-usuario.jsf">Registrar Usuario</a></li>
+						<li><a href="#{request.contextPath}/pages/seguridad/modificar-usuario.jsf">Actualizar Usuario</a></li>
+						<li><a href="#{request.contextPath}/pages/seguridad/listar-usuario.jsf">Listado de Usuarios</a></li>
+					</ul>
+					
+				</ul>
+				<p style="text-align:center;margin-top:20px;">LEYENDA</p>
+				<h:graphicImage 
+					style="width:50px;display:block;margin:auto;border-radius:5px;border:2px solid #000;"
+					value="/bootstrap/img/masculino.jpg" title="En construccion"/>
+					<br></br>
+					<p style="text-align:center;margin:0px 0px;">Usuario sin Foto</p>
+				<h:graphicImage 
+					style="width:50px;display:block;margin:auto;border-radius:5px;border:2px solid #000;"
+					value="/bootstrap/img/femenino.jpg" title="En construccion"/>
+					<br></br>
+					<p style="text-align:center;margin:0px 0px;">Usuaria sin Foto</p>
+				<h:graphicImage 
+					style="width:50px;display:block;margin:auto;background-color:white;border-radius:5px;border:2px solid #000;"
+					value="/bootstrap/img/firma.png" title="En construccion"/>
+					<br></br>
+					<p style="text-align:center;margin:0px 0px;">Usuario sin Firma</p>
+				<h:graphicImage 
+					style="width:50px;display:block;margin:auto;"
+					value="/bootstrap/img/construccion.png" title="En construccion"/>
+					<br></br>
+					<p style="text-align:center;margin-bottom:150px">Pagina en Construccion</p>
+			</div>
+</div>
+	
+	</header>
+	<section class="main">
+		<section class="">
+			<div class="row general">
+				<ui:insert name="contenido">
+				</ui:insert>
+			</div>
+		</section>
+		
+	</section>
+	
+	<script type="text/javascript" src="#{request.contextPath}/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="#{request.contextPath}/bootstrap/js/validate.js"></script>
+	<script>
+		function justNumbers(e){
+        	var keynum = window.event ? window.event.keyCode : e.which;
+        	if ((keynum == 8) || (keynum == 46))
+        		return true;
+        	return /\d/.test(String.fromCharCode(keynum));
+        }
+	</script>
+	
+					<script type="text/javascript" >
+					var varFirma = document.getElementById("idFirma");
+					var btnLimpiar = document.getElementById("btnLimpiar");
+					window.addEventListener('load', init);
+					function init(){
+						var canvas=document.querySelector('#canvasFirma'),context,painting;
+						if (canvas == null) return;context = canvas.getContext("2d");
+						if (context == null) return;painting = false;
+						context.strokeStyle = "#00f";context.lineWidth = 3;context.font = "15px Helvetica";
+						canvas.addEventListener("mousedown", function(ev){painting = true;context.beginPath();context.moveTo(ev.offsetX, ev.offsetY);},false);
+						canvas.addEventListener("mousemove", function(ev){
+							updateReadout(ev.offsetX, ev.offsetY);
+							if (painting) {paint(ev.offsetX, ev.offsetY);}
+							function updateReadout(x, y) {context.clearRect(0, 0, 0, 0);}
+							function paint(x, y) {context.lineTo(ev.offsetX, ev.offsetY);context.stroke();}
+						}, false);
+						canvas.addEventListener("mouseup", function(){painting = false;context.closePath();}, false);
+						canvas.addEventListener("mousemove", function(ev) {
+							var imgFirma=canvas.toDataURL('image/png');
+							varFirma.setAttribute('value', imgFirma);
+						});
+						btnLimpiar.addEventListener('click', function(e){
+							var canvas = document.getElementById("canvasFirma");
+							var ctx = canvas.getContext("2d");
+							ctx.clearRect(0, 0, canvas.width, canvas.height);
+							varFirma.setAttribute('value', '');
+						});
+					}
+					</script>
+					<script type="text/javascript">
+					var varFoto = document.getElementById("idFoto");
+					window.addEventListener('load', init);
+					function init(){
+						var video=document.querySelector('#canvasVideo'),
+						canvas=document.querySelector('#canvasFoto'),
+						startbutton  = document.querySelector('#botonIniciar'),
+						btn=document.querySelector('#btnCapturar');
+						window.video = {'StreamVideo': null}
+						navigator.getUserMedia=(navigator.getUserMedia || navigator.webkitGetUserMedia|| navigator.mozGetUserMedia|| navigator.msGetUserMedia);
+						startbutton.addEventListener('click', function(ev){
+							varFoto.setAttribute('value', '');
+							if(navigator.getUserMedia){
+								navigator.getUserMedia({video:true},function(stream){
+									video.StreamVideo = stream;
+									video.src=window.URL.createObjectURL(stream);
+									video.play();
+								},function(e){console.log(e);})
+							}else alert('Tienes un navegador obsoleto');
+						});
+						video.addEventListener('loadedmetadata',function(){canvas.width=video.videoWidth;canvas.height=video.videoHeight;},false);
+						btn.addEventListener('click', function(e){
+							canvas.getContext('2d').drawImage(video,0,0);
+							var imgData2=canvas.toDataURL('image/png');
+							varFoto.setAttribute('value', imgData2);
+						});
+						
+					}
+					</script>
+
+</h:body>
+</f:view>
+</html>

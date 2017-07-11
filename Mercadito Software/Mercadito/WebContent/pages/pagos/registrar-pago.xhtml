@@ -1,0 +1,133 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:b="http://bootsfaces.net/ui"
+	template="../../templates/master.xhtml">
+	
+	<ui:define name="contenido">
+    
+    <div class="container">
+		<div class="col-sm-12 ">
+			<h2 class="text-center text-primary">Registrar Pago</h2>
+			<div class="form-group">
+				<h3>Buscar Boleta</h3>
+			</div>
+			<h:form action="" class="col-sm-12">
+				<div class="col-sm-2 form-group"><label for="">Buscar por</label></div>
+				<div class="col-sm-3 form-group">
+					<h:selectOneMenu name="" id="cboTipoB" styleClass="form-control">
+						<f:selectItem itemValue="0" itemLabel="Seleccione tipo de búsqueda"></f:selectItem>
+						<f:selectItem itemValue="1" itemLabel="Socio"></f:selectItem>
+						<f:selectItem itemValue="2" itemLabel="DNI"></f:selectItem>
+					</h:selectOneMenu>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<input type="text" placeholder="Criterio de busqueda" class="form-control" name="" id=""/>
+					</div>
+				</div>
+				<div class="col-sm-3 form-group">
+					<input type="submit" class="form-control btn btn-info" value="Consultar"/>
+				</div>
+				
+				<table class="table table-condense">
+					<tr>
+						<th>DNI</th>
+						<th>Nombre</th>
+						<th>Establecimiento</th>
+						<th>Fecha Generada</th>
+						<th>Monto</th>
+						<th>Estado</th>
+						<th>&#x2714;</th>
+					</tr>
+					<tbody>
+						<tr>
+							<td>12356678</td>
+							<td>Hola Mundo</td>
+							<td>ESTABLECIMIENTO A1</td>
+							<td>15/03/2016</td>
+							<td>150.00</td>
+							<td>Por Pagar</td>
+							<td><input type="checkbox"/></td>
+						</tr>
+						<tr>
+							<td>12356678</td>
+							<td>Hola Mundo</td>
+							<td>ESTABLECIMIENTO A2</td>
+							<td>15/03/2016</td>
+							<td>150.00</td>
+							<td>Por Pagar</td>
+							<td><input type="checkbox"/></td>
+						</tr>
+						<tr>
+							<td>12356678</td>
+							<td>Hola Mundo</td>
+							<td>ESTABLECIMIENTO A3</td>
+							<td>15/03/2016</td>
+							<td>150.00</td>
+							<td>Por Pagar</td>
+							<td><input type="checkbox"/></td>
+						</tr>
+						<tr>
+							<td>12356678</td>
+							<td>Hola Mundo</td>
+							<td>ESTABLECIMIENTO A4</td>
+							<td>15/03/2016</td>
+							<td>150.00</td>
+							<td>Por Pagar</td>
+							<td><input type="checkbox"/></td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<div class="row">
+					<div class="col-sm-4 col-sm-offset-4">
+						<div class="form-group col-sm-offset-1 col-xs-offset-1 col-sm-10 col-xs-10">
+							<input type="submit" class="form-control btn btn-info" value="Agregar a Detalle"/>
+						</div>
+					</div>
+				</div>
+			</h:form>
+		</div>
+	</div>
+	
+	<div class="container">
+		<div class="form-group">
+			<h3>Detalle de Boleta</h3>
+		</div>
+		<h:form action="" class="col-sm-12">
+			<table class="table table-condensed">
+				<tr>
+					<th>Socio</th>
+					<th>Establecimiento</th>
+					<th>Total</th>
+				</tr>
+				<tbody>
+					<tr>
+						<td>Hola Mundo</td>
+						<td>ESTABLECIMIENTO A1</td>
+						<td>150.00</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="col-sm-12">
+				<div class="col-sm-2 form-group col-sm-offset-7"><h4 class="text-center">Total a Pagar</h4></div>
+				<div class="col-sm-3 form-group">
+					<label class="form-control text-right">S/ 150.00</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-2">
+					<div class="form-group col-sm-offset-1 col-xs-offset-1 col-sm-10 col-xs-10">
+						<input type="submit" class="form-control btn btn-info" value="Registrar Pago"/>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</div>
+    
+	</ui:define>
+</ui:composition>

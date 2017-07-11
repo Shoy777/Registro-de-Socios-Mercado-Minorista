@@ -1,0 +1,253 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="../../templates/master.xhtml"
+	>
+	<style>
+	*{font-size:18px;}
+	</style>
+	<ui:define name="contenido">
+		<div class="" >
+			<div class="">
+				<h:form enctype="multipart/form-data" id="idForm" name="idForm" class="col-sm-12 form-bottom" prependId="false">
+				<p:messages autoUpdate="true"/>
+				<h:inputHidden id="idFirma" value="#{usuariomanaged.fotoEn64}"/>
+				<h:inputHidden id="idFoto" value="#{usuariomanaged.fotoEn642}"/>
+					
+					<h2 class="text-center text-primary">Registrar Usuario</h2>
+					<!-- Datos Generales -->
+					<div class="row">
+					
+							<!-- Tipo de Usuario -->
+							<div class="col-sm-4 col-sm-offset-4">
+								<div class="form-group">
+								
+									<h:outputLabel styleClass="">Tipo de Usuario</h:outputLabel>
+									<h:selectOneMenu styleClass="form-control"  value="#{usuariomanaged.usuarioG.tipoUsuario}" name="tipoUsuario">
+										<f:selectItem itemValue="" itemLabel="Tipo de Usuario" />
+										<f:selectItem itemValue="Presidente" itemLabel="Presidente" />
+										<f:selectItem itemValue="Secretaria" itemLabel="Secretaria" />
+									</h:selectOneMenu>
+								</div>
+							</div>
+							
+						<div class="col-xs-12 col-sm-9">
+							
+							<!-- Datos Generales -->
+							<div class="datos-generales">
+								<h3>Datos Generales</h3>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<h:outputLabel styleClass="s">Nombres</h:outputLabel>
+										<h:inputText type="text" placeholder="Nombres" class="form-control" 
+										value="#{usuariomanaged.usuarioG.nombres}" name="nombre_usuario">
+										</h:inputText>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Apellidos</h:outputLabel>
+										<h:inputText type="text" placeholder="Apellidos" class="form-control" 
+										value="#{usuariomanaged.usuarioG.apellidos}" name="apellido_usuario">
+										</h:inputText>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<h:outputLabel styleClass="">DNI</h:outputLabel>
+										<h:inputText type="text" placeholder="DNI" class="form-control" value="#{usuariomanaged.usuarioG.dni}" 
+											onkeypress="return justNumbers(event);" onkeyup="this.value = this.value.slice(0,8)"
+										name="dni_usuario"/>
+									</div>
+								</div>
+								
+								<div class="col-sm-12">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Direccion de Residencia</h:outputLabel>
+										<h:inputText type="text" class="form-control" placeholder="Direccion de Residencia" 
+											value="#{usuariomanaged.usuarioG.direccionResidencia}">
+										</h:inputText>
+									</div>
+								</div>
+								
+								<!-- contacto -->
+								<div class="col-sm-3">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Telefono Fijo</h:outputLabel>
+										<h:inputText type="text" placeholder="Telefono Fijo" class="form-control" 
+										value="#{usuariomanaged.usuarioG.telefonoFijo}" onkeypress="return justNumbers(event);"
+										onkeyup="this.value = this.value.slice(0,7)"/>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Telefono Movil</h:outputLabel>
+										<h:inputText type="text" placeholder="Telefono Movil" class="form-control" 
+										value="#{usuariomanaged.usuarioG.telefonoMovil}" onkeypress="return justNumbers(event);"
+										onkeyup="this.value = this.value.slice(0,9)"/>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Correo Electronico</h:outputLabel>
+										<h:inputText type="text" placeholder="Correo Electronico" class="form-control" 
+										value="#{usuariomanaged.usuarioG.correo}" id="correo_usuario"/>
+									</div>
+								</div>
+								
+								<div class="form-group col-sm-4">
+										<h:outputLabel styleClass="">Usuario</h:outputLabel>
+									<h:inputText type="text" class="form-control" placeholder="Usuario" 
+									value="#{usuariomanaged.usuarioG.usuario}" id="usuario_usuario" />
+								</div>
+								<div class="form-group col-sm-4">
+										<h:outputLabel styleClass="">Contraseña</h:outputLabel>
+									<h:inputText type="password" class="form-control" placeholder="Contraseña" 
+										value="#{usuariomanaged.confirmar}" />
+								</div>
+								<div class="form-group col-sm-4">
+										<h:outputLabel styleClass="">Confirmar Contraseña</h:outputLabel>
+									<h:inputText type="password" class="form-control" placeholder="Contraseña" 
+										value="#{usuariomanaged.usuarioG.password}" />
+								</div>
+								
+								<div class="clearfix"></div>
+							</div>
+							
+							<!-- datos adicionales -->
+							<div class="datos-adicionales">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Fecha de Nacimiento</h:outputLabel>
+										<div class='input-group date' data-date-format="dd-mm-yyyy"><!-- 
+											<input type="text" class="form-control" id='datepicker1'/>-->
+											<p:calendar styleClass="" value="#{usuariomanaged.usuarioG.fechaNac}"
+												locale="de" navigator="true" pattern="MM/dd/yyyy" onkeydown="return false;"/>
+											<span class="input-group-addon">
+												<span class="glyphicon glyphicon-calendar"></span>
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Sexo</h:outputLabel>
+										<h:selectOneMenu styleClass="form-control"  value="#{usuariomanaged.usuarioG.sexo}" id="cboSexo">
+											<f:selectItem 
+											itemLabel="Seleccione Sexo"
+											itemValue="0"/>
+											<f:selectItems value="#{dominiomanaged.listadoSexo}" 
+											var="u" itemLabel="#{u.descripcion}" itemValue="#{u.descripcion}"/>
+										</h:selectOneMenu>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Estado Civil</h:outputLabel>
+										<h:selectOneMenu styleClass="form-control" value="#{usuariomanaged.usuarioG.estadoCivil}" id="cboEstadoCivil"
+										onchange="if(this.value=='CASADO') {document.getElementById('txtNomConyuge').disabled = false;
+										document.getElementById('txtNomConyuge').value = '';} 
+										else {document.getElementById('txtNomConyuge').disabled = true;
+										document.getElementById('txtNomConyuge').value = '';}">
+											<f:selectItem 
+											itemLabel="Seleccione Estado Civil"
+											itemValue="0"/>
+											<f:selectItems value="#{dominiomanaged.listadoEstadoCivil}" 
+											var="u" itemLabel="#{u.descripcion}" itemValue="#{u.descripcion}"/>
+										</h:selectOneMenu>
+									</div>
+								</div>								
+								<div class="col-sm-12">
+									<div class="form-group">
+										<h:outputLabel styleClass="">Nombre Conyugue</h:outputLabel>
+										<h:inputText type="text" placeholder="Nombre Conyugue" class="form-control" 
+										value="#{usuariomanaged.usuarioG.nombreConyuge}" id="txtNomConyuge" disabled="true" />
+									</div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+								
+							<!-- Lugar de Nacimiento -->
+							<div class="lugar-nacimiento">
+								<h3>Lugar de Nacimiento</h3>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<h:selectOneMenu class="form-control" value="#{usuariomanaged.departamento}" id="cboDepartamento">
+											<p:ajax listener="#{usuariomanaged.listarProvincia}" update="cboProvincia"/>
+											<f:selectItem itemLabel="Seleccione Departamento" itemValue=""/>
+											<f:selectItems value="#{usuariomanaged.listaDepartamentos}" 
+												var="u" itemLabel="#{u.departamento}" itemValue="#{u.departamento}"/>
+										</h:selectOneMenu>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<h:selectOneMenu class="form-control" value="#{usuariomanaged.provincia}" id="cboProvincia">
+											<p:ajax listener="#{usuariomanaged.listarDistrito}" update="cboDistrito"/>
+											<f:selectItem itemLabel="Seleccione Provincia" itemValue=""/>
+											<f:selectItems value="#{usuariomanaged.listaProvincias}" 
+												var="u" itemLabel="#{u.provincia}" itemValue="#{u.provincia}"/>
+										</h:selectOneMenu>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<h:selectOneMenu class="form-control" value="#{usuariomanaged.usuarioG.ubigeo.idUbigeo}" id="cboDistrito">
+											<f:selectItem itemLabel="Seleccione Distrito" itemValue="0"/>
+											<f:selectItems value="#{usuariomanaged.listaDistritos}" 
+												var="u" itemLabel="#{u.distrito}" itemValue="#{u.idUbigeo}"/>
+										</h:selectOneMenu>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+						
+						</div>
+						<!-- Captura de Foto -->
+						<div class="col-xs-12 col-sm-3">
+							<video class="col-xs-12 col-sm-12 thumbnail" id="canvasVideo"></video>
+							<canvas class="col-xs-12 col-sm-12 thumbnail" id="canvasFoto"></canvas>
+							<button id='botonIniciar' type="button" class="btn btn-info col-xs-5 col-sm-5 col-sm-offset-0">
+								<span class="glyphicon glyphicon-camera"></span>
+							</button>
+							<button id='btnCapturar' type="button" class="btn btn-info col-xs-5 col-xs-offset-2 col-sm-5 col-sm-offset-2">
+								<span class="glyphicon glyphicon-picture"></span>
+							</button>
+						</div>
+						<div class="col-xs-12 col-sm-3" id="">
+							<canvas class="col-xs-12 col-sm-12 thumbnail" id="canvasFirma" width="195" height="160">
+							Su navegador no soporta HTML5 Canvas
+							</canvas>
+							<button id='btnLimpiar' type="button" class="btn btn-info col-xs-12 col-sm-12">
+								<span>Editar Firma</span>
+							</button>
+							<h3 class="text-center">Firma del Usuario</h3>
+						</div>
+					</div>
+					
+					<!-- Submit -->
+					<div class="row">
+						<div class="col-sm-8 col-sm-offset-2">
+							<div class="form-group col-sm-offset-1 col-xs-offset-1 col-sm-10 col-xs-10">
+								<p:commandButton 
+									styleClass="btn btn-info form-control"
+							    	ajax="false"
+							    	value="Grabar" 
+							    	action="#{usuariomanaged.Grabar}" update="@parent"
+							    	onclick="if (! confirm('¿Está Seguro de Registrar Usuario?')) return false">
+							    </p:commandButton>
+							</div>
+						</div>
+					</div>
+					<p:messages autoUpdate="true"/>
+						
+				</h:form>			
+				
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</ui:define>
+</ui:composition>

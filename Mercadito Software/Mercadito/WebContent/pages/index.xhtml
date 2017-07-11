@@ -1,0 +1,509 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<f:view contentType="text/html">
+<h:head>
+	<title>Mercado Señor de los Milagros</title>
+	<!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
+    <link href="#{request.contextPath}/bootstrap/css/bootstrap2.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link href="#{request.contextPath}/bootstrap/css/freelancer.css" rel="stylesheet"/>
+
+    <!-- Custom Fonts -->
+	<link href="#{request.contextPath}/bootstrap/estilos.css" rel="stylesheet"/>
+    <link href="#{request.contextPath}/bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"/>
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css"/>
+    <style type="text/css">
+	.img-responsive{
+		width:360px;
+		height:260px;
+	}
+	.hover{
+		vertical-align: middle;
+		display: block;
+		margin:0 5px;
+		height:44px;
+		width:44px;
+		padding-top:10px;
+		font-size:25px;
+		background-color:white;padding-right: 10px;padding-left: 10px;
+	}
+	.hover:hover{color:#000;}
+	.navbar-nav > li > a {
+    line-height: 10px;
+}.navbar-brand {
+    padding: 14.5px 15px;
+}
+footer{
+padding:0px}
+	</style>
+	<f:event listener="#{usuariomanaged.verificarSesion}" type="preRenderView"></f:event>
+</h:head>
+<h:body id="page-top" class="index">
+ 	<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#{request.contextPath}/pages/socio/registrar.jsf" title="Registre Socios">Mercado Minorista</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#portfolio">Mercado</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#about">Nosotros</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#{request.contextPath}/pages/socio/registrar.jsf">Registrar Socio</a>
+                    </li>
+                    <li class="page-scroll">
+                    <h:graphicImage style="vertical-align:middle;display:block;height:44px;width:44px;margin:0 5px" value="/#{usuariomanaged.foto}" 
+								styleClass="img"></h:graphicImage>
+                    </li>
+                    <li role="presentation">
+	                    <h:form>
+		                    <h:commandLink styleClass="fa fa-fw fa-power-off btn hover" 
+			                    actionListener="#{usuariomanaged.cerrarSesion}"
+			                    action="/pages/Login?faces-redirect=true" title="Cerrar Sesion" >
+		                    </h:commandLink>
+	                    </h:form>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-text">
+                    	<span class="name">Bienvenido 
+                    		<h:outputLabel styleClass="name" style="font-size:24px;" value="#{usuariomanaged.nombres} #{usuariomanaged.apellidos} "/>
+                    		<hr class="star-light"/>
+						</span>
+                    <img class="img-responsive" src="#{request.contextPath}/bootstrap/img/puesto.png" alt=""/>
+                    </div>
+                    <div class="intro-text">
+                        <span class="name">Mercado Minorista</span>
+                        <hr class="star-light"/>
+                        <span class="skills">Una nueva experiencia en Mercados</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Portfolio Grid Section -->
+    <section id="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>MERCADO</h2>
+                    <hr class="star-primary"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 portfolio-item">
+                    <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="#{request.contextPath}/bootstrap/img/carnes.jpg" class="img-responsive" alt=""/>
+                    </a>
+                </div>
+                <div class="col-sm-4 portfolio-item">
+                    <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="#{request.contextPath}/bootstrap/img/frutas.jpg" class="img-responsive" alt=""/>
+						
+                    </a>
+                </div>
+                <div class="col-sm-4 portfolio-item">
+                    <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="#{request.contextPath}/bootstrap/img/pescados.jpg" class="img-responsive" alt=""/>
+                    </a>
+                </div>
+                <div class="col-sm-4 portfolio-item">
+                    <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="#{request.contextPath}/bootstrap/img/pollos.jpg" class="img-responsive" alt=""/>
+                    </a>
+                </div>
+                <div class="col-sm-4 portfolio-item">
+                    <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="#{request.contextPath}/bootstrap/img/tuberculo-1.jpg" class="img-responsive" alt=""/>
+                    </a>
+                </div>
+                <div class="col-sm-4 portfolio-item">
+                    <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="#{request.contextPath}/bootstrap/img/tuberculo-2.jpg" class="img-responsive" alt=""/>
+                    </a>
+                </div>
+                <div class="col-sm-4 portfolio-item">
+                    <a href="#portfolioModal7" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="#{request.contextPath}/bootstrap/img/verduras-1.jpg" class="img-responsive" alt=""/>
+                    </a>
+                </div>
+                <div class="col-sm-4 portfolio-item">
+                    <a href="#portfolioModal8" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="#{request.contextPath}/bootstrap/img/verduras-2.jpg" class="img-responsive" alt=""/>
+                    </a>
+                </div>
+                <div class="col-sm-4 portfolio-item">
+                    <a href="#portfolioModal9" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="#{request.contextPath}/bootstrap/img/verduras-3.jpg" class="img-responsive" alt=""/>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="success" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>NOSOTROS</h2>
+                    <hr class="star-light"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <p>Dirigido a personas emprededoras para mercadeo minorista, venta en menudeo, o detallista, para empresa comercial o persona en régimen de 
+					autónomo que quiera vender sus productos al consumidor. Ofrecemos calidad en nuestro servicio, garatinzando la rentabilidad en la distribución, 
+					de sus productos.</p>
+                </div>
+                <div class="col-lg-4">
+                    <p>Gracias a la confianza depositada por nuestros clientes y el esfuerzo de nuestro equipo humano, 
+					actualmente contamos con unas instalaciones de mas de 10.000 m2, para ofrecer un lugar donde poder ofrecer sus artículos, 
+					tanto de primeras marcas, líderes en el mercado, como de segundas marcas; todo ello con una excelente relación calidad-precio. 
+					Disponiendo de mas de 2000 establecimientos, entre puestos, estantes y jabas.</p>
+                </div>
+                <div class="col-lg-4">
+                    <p>Damos la mayor importancia a los productos nacionales, contando también con importaciones de países asiáticos, 
+					lo que nos permite tener gran variedad a precios realmente competitivos y favorables para suministrar a 
+					distintos sectores empresariales que abarcan desde el comercio minorista (tienda multiprecio, papelería, 
+					ferretería, peluquería, floristería, restaurante...) hasta auto-consumo para cualquier tipo de negocio</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="footer-above">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-col col-md-4 col-md-offset-4">
+                        <h3>Local</h3>
+                        <p>Calle las Begonias 777<br/> - Lima, Lima Peru</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        Copyright &copy; Sitio Web 2016
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-top page-scroll visible-xs visible-sm">
+        <a class="btn btn-primary" href="#page-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
+
+    <!-- Portfolio Modals -->
+    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>CARNES</h2>
+                            <hr class="star-primary"/>
+                            <img src="#{request.contextPath}/bootstrap/img/carnes.jpg" class="img-responsive img-centered" alt=""/>
+                            <p>Contamos con puestos especiales para tu negocio</p>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>FRUTAS</h2>
+                            <hr class="star-primary"/>
+                            <img src="#{request.contextPath}/bootstrap/img/frutas.jpg" class="img-responsive img-centered" alt=""/>
+                            <p>Contamos con puestos especiales para tu negocio</p>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>PESCADOS</h2>
+                            <hr class="star-primary"/>
+                            <img src="#{request.contextPath}/bootstrap/img/pescados.jpg" class="img-responsive img-centered" alt=""/>
+                            <p>Contamos con puestos especiales para tu negocio</p>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>POLLOS</h2>
+                            <hr class="star-primary"/>
+                            <img src="#{request.contextPath}/bootstrap/img/pollos.jpg" class="img-responsive img-centered" alt=""/>
+                            <p>Contamos con puestos especiales para tu negocio</p>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>PAPAS Y CAMOTE</h2>
+                            <hr class="star-primary"/>
+                            <img src="#{request.contextPath}/bootstrap/img/tuberculo-1.jpg" class="img-responsive img-centered" alt=""/>
+                            <p>Contamos con puestos especiales para tu negocio</p>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>TUBERCULO</h2>
+                            <hr class="star-primary"/>
+                            <img src="#{request.contextPath}/bootstrap/img/tuberculo-2.jpg" class="img-responsive img-centered" alt=""/>
+                            <p>Contamos con puestos especiales para tu negocio</p>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="portfolio-modal modal fade" id="portfolioModal7" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>VERDURAS</h2>
+                            <hr class="star-primary"/>
+                            <img src="#{request.contextPath}/bootstrap/img/verduras-1.jpg" class="img-responsive img-centered" alt=""/>
+                            <p>Contamos con puestos especiales para tu negocio</p>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="portfolio-modal modal fade" id="portfolioModal8" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>ESPECIAS</h2>
+                            <hr class="star-primary"/>
+                            <img src="#{request.contextPath}/bootstrap/img/verduras-2.jpg" class="img-responsive img-centered" alt=""/>
+                            <p>Contamos con puestos especiales para tu negocio</p>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="portfolio-modal modal fade" id="portfolioModal9" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>FRUTAS VERDURAS</h2>
+                            <hr class="star-primary"/>
+                            <img src="#{request.contextPath}/bootstrap/img/verduras-3.jpg" class="img-responsive img-centered" alt=""/>
+                            <p>Contamos con puestos especiales para tu negocio</p>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="#{request.contextPath}/bootstrap/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="#{request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="#{request.contextPath}/bootstrap/js/classie.js"></script>
+    <script src="#{request.contextPath}/bootstrap/js/cbpAnimatedHeader.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="#{request.contextPath}/bootstrap/js/freelancer.js"></script>
+</h:body>
+</f:view>
+</html>
